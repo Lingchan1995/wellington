@@ -21,10 +21,10 @@ public class Embedding {
      int iterations = 3;
      int layerSize = 2500;
      
-     /*加载语句语料，*/
+     /* 加载语句语料 */
      SentenceIterator iter=new LineSentenceIterator
     		 (new File("testData/sentences.txt"));
-     /*String 转化为 tokenizer格式，加载分词结果*/
+     /* String 转化为 tokenizer格式，加载分词结果 */
      logger.info("not confirmed code");
      TokenizerFactory tokenizer = new DefaultTokenizerFactory();
      tokenizer.create(material);

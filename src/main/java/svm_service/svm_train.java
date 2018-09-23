@@ -159,7 +159,7 @@ public class svm_train {
 		param.nr_weight = 0;
 		param.weight_label = new int[0];
 		param.weight = new double[0];
-		cross_validation = 3;
+		cross_validation = 0;
 
 		// parse options
 		for(i=0;i<argv.length;i++)

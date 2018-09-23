@@ -1,6 +1,7 @@
 package embeddings;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -59,22 +60,32 @@ public class CollectData {
      */
 	public static List<Message> getSegmentation(List<Message> allData) throws IOException{
 		List<Message> collected = new ArrayList<Message>();
-	    File file=new File("testData/sentences.txt");
-	    OutputStream f1= new FileOutputStream(file);
-	    
+   
 		logger.info("正在进行分词");
 		
         // 载入自定义的Properties文件
-		/*StanfordCoreNLP pipeline = new StanfordCoreNLP("CoreNLP-chinese.properties"); */
+		//StanfordCoreNLP pipeline = new StanfordCoreNLP("CoreNLP-chinese.properties"); 
 		
-        StanfordCoreNLP pipeline = new StanfordCoreNLP(PropertiesUtils.asProperties(
+        /*StanfordCoreNLP pipeline = new StanfordCoreNLP(PropertiesUtils.asProperties(
                 "annotators", "tokenize,ssplit",
                 "ssplit.isOneSentence", "true",
                 "tokenize.language", "zh",
                 "segment.model", "edu/stanford/nlp/models/segmenter/chinese/ctb.gz",
                 "segment.sighanCorporaDict", "edu/stanford/nlp/models/segmenter/chinese",
                 "segment.serDictionary", "edu/stanford/nlp/models/segmenter/chinese/dict-chris6.ser.gz",
-                "segment.sighanPostProcessing", "true"
+                "segment.sighanPostProcessing", "true"               
+        ));*/
+		StanfordCoreNLP pipeline = new StanfordCoreNLP(PropertiesUtils.asProperties(
+                "annotators", "tokenize,ssplit,pos",
+                //"ssplit.isOneSentence", "true",
+                "customAnnotatorClass.segment","edu.stanford.nlp.pipeline.ChineseSegmenterAnnotator",
+                "tokenize.language", "zh",
+                "segment.model", "edu/stanford/nlp/models/segmenter/chinese/ctb.gz",
+                "segment.sighanCorporaDict", "edu/stanford/nlp/models/segmenter/chinese",
+                "segment.serDictionary", "edu/stanford/nlp/models/segmenter/chinese/dict-chris6.ser.gz",
+                "segment.sighanPostProcessing", "true",
+                "ssplit.boundaryTokenRegex","[.]|[!?]+|[\u3002]|[\uFF01\uFF1F]+",
+                "pos.model","edu/stanford/nlp/models/pos-tagger/chinese-distsim/chinese-distsim.tagger"
         ));
 		       for(Message token:allData){
 		        Message temp=new Message();
@@ -83,9 +94,7 @@ public class CollectData {
 		    	  temp.setNum(token.getNum()); 
 		    	  temp.setMessage(Segmentation.getSegmentation
 		    			  (token.getMessage(),pipeline).toString());
-		    	  
-				  f1.write((temp.getMessage()+"\n").getBytes());//写入所有文本备用embedding
-		    	  
+
 		    	  temp.setClassification(token.getClassification());
 		    	 
 		    	  collected.add(temp);
@@ -93,10 +102,21 @@ public class CollectData {
 		       }
 		   logger.info("分词完成");
 		    
-		   f1.close(); 
+		   
 		return collected;
 	}
-	
+	public static void outputsen(List<Message> datatra, List<Message> datatst) throws IOException {
+	    File file=new File("testData/sentences.txt");
+	    OutputStream f1= new FileOutputStream(file);
+	    
+	    for(Message temp:datatra)
+	    f1.write((temp.getMessage()+"\n").getBytes());
+	    
+	    for(Message temp:datatst)
+		f1.write((temp.getMessage()+"\n").getBytes());
+	    
+	    f1.close(); 
+	}
 	/**
      * 
      * @param text 分词数据，分词用空格在String中隔开

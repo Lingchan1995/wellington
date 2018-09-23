@@ -43,7 +43,7 @@ public class Segmentation {
 			                String word = token.get(CoreAnnotations.TextAnnotation.class);
 			                String pos = token.getString(PartOfSpeechAnnotation.class);
 							
-			                if(!pos.equals("PU")) {
+			                if(pos.equals("NN")||pos.equals("VV")||pos.equals("JJ")||pos.equals("AD")||pos.equals("VA")) {
 								if(segment.containsKey(word))
 									segment.replace(word,segment.get(word)+1);
 								

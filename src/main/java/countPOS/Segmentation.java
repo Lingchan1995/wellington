@@ -1,5 +1,6 @@
-package embeddings;
+package countPOS;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,16 +22,14 @@ public class Segmentation {
      * @param text 单条文本内容
      * @return 处理后分词数据，排除标点符号后，每个单词的出现频率
      */
-	public static StringBuffer getSegmentation(String text,StanfordCoreNLP pipeline) {
+	public static Map<String,String> getSegmentation(String text,StanfordCoreNLP pipeline) {
 		            //存储分词结果和对应数目的数组
-		            StringBuffer segment = new StringBuffer();           
+		            Map<String,String> segment = new HashMap<String,String>();           
 
-					logger.info(text);
 					// 用一些文本来初始化一个注释。文本是构造函数的参数。
 					Annotation annotation;
 					annotation = new Annotation(text);
-				
-			        logger.info("正在获取xlsx文件中的数据");
+
 					// 运行所有选定的代码在本文
 					pipeline.annotate(annotation);
 					
@@ -41,13 +40,10 @@ public class Segmentation {
 			            for (CoreLabel token : sentence.get(CoreAnnotations.TokensAnnotation.class)){
 			                String word = token.get(CoreAnnotations.TextAnnotation.class);
 			                String pos = token.getString(PartOfSpeechAnnotation.class);
-							
-			                if(pos.equals("NN")||pos.equals("VV")||pos.equals("JJ")||pos.equals("AD")||pos.equals("VA")) {
-						        segment.append(word+" ");
-			                }
+								if(!segment.containsKey(word))
+									segment.put(word, pos); 
 			            }
 			          }
-					logger.info("数据获取成功");
 					
 			return segment;
 	}

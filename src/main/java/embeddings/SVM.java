@@ -24,10 +24,10 @@ public class SVM {
 	@SuppressWarnings("static-access")
 	public static void svmtrain() throws IOException {
 	
-	String[] arg = { "testData/trainE2.txt", // 存放SVM训练模型用的数据的路径
+	String[] arg = { "testData/trainE1.txt", // 存放SVM训练模型用的数据的路径
 	                 "testData/modelE_r.txt" }; // 存放SVM通过训练数据训/ //练出来的模型的路径
 
-    String[] parg = { "testData/trainE1.txt", // 这个是存放测试数据
+    String[] parg = { "testData/trainE2.txt", // 这个是存放测试数据
 	                  "testData/modelE_r.txt", // 调用的是训练以后的模型
 	                  "testData/outE_r.txt" }; // 生成的结果的文件的路径
     
@@ -83,6 +83,40 @@ public class SVM {
 		}
 		f1.close();
 		f2.close();
+		logger.info("数据输出准备完成");
+	}
+	
+	/**
+     * 将数据转化为libsvm接受的格式
+     * @param dataVec 转化为向量的text数据
+     */
+	public static void writeTra(List<Vec> dataVec) throws IOException {
+		File file1=new File("testData/trainE1.txt");
+		FileAct.checkFile(file1);
+		OutputStream f1= new FileOutputStream(file1);
+
+		logger.info("正在输出训练数据");
+		//输出训练数据
+		for(int i=0;i<dataVec.size();i++) {
+			f1.write((dataVec.get(i).toString()+"\n")
+					  .getBytes());
+		}
+		f1.close();
+		logger.info("数据输出准备完成");
+	}
+	
+	public static void writeTst(List<Vec> dataVec) throws IOException {
+		File file1=new File("testData/trainE2.txt");
+		FileAct.checkFile(file1);
+		OutputStream f1= new FileOutputStream(file1);
+
+		logger.info("正在输出测试数据");
+		//输出训练数据
+		for(int i=0;i<dataVec.size();i++) {
+			f1.write((dataVec.get(i).toString()+"\n")
+					  .getBytes());
+		}
+		f1.close();
 		logger.info("数据输出准备完成");
 	}
 }

@@ -19,6 +19,19 @@
   </properties>
 
   <dependencies>
+  <!--mongoDB-->
+<dependency>
+    <groupId>org.mongodb</groupId>
+    <artifactId>mongo-java-driver</artifactId>
+    <version>3.2.1</version>
+</dependency>
+
+<dependency>
+    <groupId>org.mongodb.morphia</groupId>
+    <artifactId>morphia</artifactId>
+    <version>1.0.1</version>
+</dependency>
+    
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
