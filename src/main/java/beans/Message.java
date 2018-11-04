@@ -5,7 +5,13 @@ public class Message {
 	  private String num;
 	  private String message;
 	  private String classification;
-	  
+	 
+	public Message() {
+		this.num="";
+		this.message="";
+		this.classification="";
+	}
+	
 	public String getNum() {
 		return num;
 	}

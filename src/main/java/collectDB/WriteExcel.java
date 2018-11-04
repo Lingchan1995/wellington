@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class WriteExcel {
-	public static void wirte2exl(Map<String,String> dataset) {
+	public static void wirte2exl(String filename,String sysDoc,String separator,Map<String,String> dataset) {
 	//create a worksheet object
 	Workbook workbook = new XSSFWorkbook();
     //create a worksheet
@@ -40,7 +40,7 @@ public class WriteExcel {
 
     //save data in the pointed place
     try {
-        FileOutputStream fos = new FileOutputStream("src/main/java/testData/predictset.xlsx");
+        FileOutputStream fos = new FileOutputStream(sysDoc+separator+filename);
         workbook.write(fos);
         fos.close();
     } catch (IOException e) {

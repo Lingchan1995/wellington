@@ -14,7 +14,11 @@ import beans.Vec;
 
 public class Transfer {
 	private static Logger logger  = Logger.getLogger(Transfer.class);
-            
+            /**
+             * transfer double array to list
+             * @param vec
+             * @return
+             */
 	        public static List<Double> double2List(double[] vec){
 	        	List<Double> temp=new ArrayList<Double>();
 	        	
@@ -25,6 +29,12 @@ public class Transfer {
 	        }
 	
             @SuppressWarnings("null")
+            /**
+             * count the result of two vectors
+             * @param a1 vector1
+             * @param a2 vector2
+             * @return
+             */
 			public static List<Double> countVec(List<Double> a1,List<Double> a2){
             	 double temp;
             	 List<Double> vectemp =new ArrayList<Double>();
@@ -36,8 +46,26 @@ public class Transfer {
             	 return vectemp;
              }
              
-             public static List<Vec> transferVec(List<EmbeddingA> attributes) throws IOException{
-            	 File gModel = new File("testData/vec.txt");
+            /**
+             * 
+             * @param dic vector dictionary
+             * @param attributes vector expression of each 
+             *        word in the data item
+             * @param sysDoc
+             * @param separator
+             * @return document vec representation of each item
+             * @throws IOException
+             */
+             public static List<Vec> transferVec(String dic,
+            		 List<EmbeddingA> attributes,
+            		 String sysDoc,String separator) throws IOException{
+            	  
+            	 File gModel;
+            	 if(dic.equals("-1"))
+            	    gModel = new File(sysDoc+separator+"vec.txt"); 
+            	 else
+            		gModel = new File(sysDoc+separator+dic);
+            	 
             	 WordVectors wordVectors = WordVectorSerializer.loadTxtVectors(gModel);
             	 List<Vec> vectemp=new ArrayList<Vec>();
             	 
@@ -45,7 +73,7 @@ public class Transfer {
             		List<Double> vecTemp=new ArrayList<Double>();
             		Vec stm=new Vec();
             		
-            		for(int i=0;i<2500;i++)
+            		for(int i=0;i<300;i++)
             			vecTemp.add(i,0.0);
             		
             		for(int i=0;i<temp.getAttributes().size();i++) {

@@ -10,6 +10,8 @@ public class EmbeddingA {
 	
 	public EmbeddingA() {
 		attributes=new ArrayList<String>();
+		this.num="";
+		this.classification="";
 	}
 	
 	public String getNum() {

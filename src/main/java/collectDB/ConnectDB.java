@@ -20,7 +20,8 @@ import com.mongodb.client.MongoDatabase;
 
 public class ConnectDB {
          public static Map<String,String> connectDB(String ipaddr,int portnum,
-        		 String username,String dbname, String password) {  
+        		 String username,String password,String dbname,String collect,
+        		 String txtid,String txt,int limitation,int skip) {  
                  //连接到MongoDB服务 如果是远程连接可以替换“localhost”为服务器所在IP地址  
                  //ServerAddress()两个参数分别为 服务器地址 和 端口  
                  ServerAddress serverAddress = new ServerAddress(ipaddr,portnum);  
@@ -40,34 +41,37 @@ public class ConnectDB {
                  MongoDatabase mongoDatabase = mongoClient.getDatabase(dbname);  
                  System.out.println("Connect to database successfully");  
                  
-                 MongoCollection<Document> collection = mongoDatabase.getCollection("wap_posts_data");
+                 MongoCollection<Document> collection = mongoDatabase.getCollection(collect);
                  
                  List<Document> results = new ArrayList<Document>(); 
-                 FindIterable<Document> iterables = collection.find().limit(5000).skip(100);  
+                 FindIterable<Document> iterables = collection.find().limit(limitation).skip(skip);  
                  MongoCursor<Document> cursor = iterables.iterator();
                
                  Map<String,String> data=new HashMap<String,String>();
                  
                  while (cursor.hasNext()) {  
-                	 Document txt=cursor.next();
-                     results.add(txt);  
-                     System.out.println(txt.toString());
+                	 Document txttemp=cursor.next();
+                     results.add(txttemp);  
                  } 
                 
                  for(Document parse:results) {
                 	JSONObject temp=new JSONObject(parse.toJson());
-                	String txt=temp.get("post_plaintext").toString();
-                	String idtx=temp.get("_id").toString();
-                    data.put(idtx, txt);
+                	String txttemp=temp.get(txt).toString();
+                	String idtx=temp.get(txtid).toString();
+                    data.put(idtx, txttemp);
                  }
                  return data;
          }
          
-         public static void main(String args[]) {
+         public static void Connect(String ipaddr,int portnum,String username,
+        		 String password,String dbname, String collection,
+        		 String txtid,String txt,int limitation,int skip,
+        		 String sysDoc,String separator,String testFile) {
         	 Map<String,String> data=new HashMap<String,String>();
-        	 data=ConnectDB.connectDB("115.146.92.242", 27017,
-        			                     "healthvis", "healthvis", "2018healthvis");
-        	 WriteExcel.wirte2exl(data);
+        	 
+        	 data=ConnectDB.connectDB(ipaddr,portnum,username,password,
+      			   dbname,collection,txtid,txt,limitation,skip);
+        	 WriteExcel.wirte2exl(testFile,sysDoc,separator,data);
          }
 }
 

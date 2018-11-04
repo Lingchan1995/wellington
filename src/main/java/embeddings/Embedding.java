@@ -16,15 +16,17 @@ import org.deeplearning4j.text.tokenization.tokenizerfactory.TokenizerFactory;
 public class Embedding {
 	private static Logger logger  = Logger.getLogger(Embedding.class);
 	
-	public static void buildModel(String material, File file) throws IOException {
-	 int batchSize = 1000;
-     int iterations = 3;
-     int layerSize = 2500;
+	public static void buildModel(String material, File file,
+			String sysDoc, String separator) throws IOException {
+	 int batchSize = 5000;
+     int iterations = 18;
+     int layerSize = 300;
      
-     /* 加载语句语料 */
+     /* input sentence material */
      SentenceIterator iter=new LineSentenceIterator
-    		 (new File("testData/sentences.txt"));
-     /* String 转化为 tokenizer格式，加载分词结果 */
+    		 (new File(sysDoc+separator+"sentences.txt"));
+     
+     /* String transfering to certain token */
      logger.info("not confirmed code");
      TokenizerFactory tokenizer = new DefaultTokenizerFactory();
      tokenizer.create(material);

@@ -10,6 +10,8 @@ public class SegDiv {
 	
 	public SegDiv() {
 		this.segment = new HashMap<String,Integer>();
+		this.num="";
+		this.classification="";
 	}
 
 	public String getNum() {

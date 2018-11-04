@@ -9,7 +9,9 @@ public class Vec {
 	private String classification;
 	
 	public Vec() {
-	 this.vector=new ArrayList<Double>();	
+	 this.vector=new ArrayList<Double>();
+	 this.classification="";
+	 this.num="";
 	}
 	
 	public String getNum() {
