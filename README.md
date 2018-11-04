@@ -9,7 +9,7 @@ provided the way of connecting mongodb and directing to original file to do clas
 Running with command line, there are three kinds of command pattern  
 (1)connect to mongodb  
    
-  command pattern->   
+	command pattern->   
 			A. -c ipaddr portnum username password dbname collection txtid txt limitation skip  
    
 -c means connecting to mongo db, in the command the variables are referring to  
