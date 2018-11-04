@@ -8,10 +8,12 @@ provided the way of connecting mongodb and directing to original file to do clas
 ########################COMMAND#####################################  
 Running with command line, there are three kinds of command pattern  
 (1)connect to mongodb  
-command pattern->   
+   
+  command pattern->   
 			A. -c ipaddr portnum username password dbname collection txtid txt limitation skip  
    
 -c means connecting to mongo db, in the command the variables are referring to  
+  
 			 1. ipaddr -> ip address of the mongodb to connect;
 			 2. portnum-> port number to connect the db;
 			 3. username-> username of the rights access to the db;
@@ -28,7 +30,8 @@ the data collected from database will be stored after the name of the trainFile 
 the next model selection part of named after "test.xlsx"
 			 
 (2)select classifying model  
-command pattern->  
+  
+	command pattern->  
 	                   A. -t trainFile testFile  
 	                   B. -e trainFile testFile dictionary  
 					   C. -b trainFile testFile dictionary  
@@ -37,6 +40,7 @@ command pattern->
 -e means only use embedding model to do classification  
 -b means use both of the two model to do classification  
 in the command the variables are referring to  
+  
 	         1. trainFile->xlsx file name, store the training data;  
 	         2. testFile->xlsx file name, store the data to be classified;  
 			 3. dictionary->file holding the word embedding vectors, if set  
@@ -54,7 +58,8 @@ id refers to the unique identification of one data ithem
 classification referes to the classification result of the data item  
   
 (3)combination  
-command pattern->  
+  
+	command pattern->  
 				A. -n oldFile newFile    
    
 -n means combine oldFile and newFile to a file named after oldFile  
