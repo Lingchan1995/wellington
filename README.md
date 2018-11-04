@@ -64,9 +64,9 @@ in the command the variables are referring to
 								
 #############################DESCRIPTION##################################  
 during the classification process, there will be several middle files:  
+  
 				1.  segments.txt-> in tf-idf model, segementation result of each item with  
 									simple word frequency  
-     
 				2.  label.txt-> in tf-idf model, each word with its tf-idf value  
 				3.  labelF.txt-> in tf-idf model, selected words as attributes with high tf-idf values  
 				4.  train1.txt-> in tf-idf model,training data matching libsvm input pattern  
