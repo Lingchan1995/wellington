@@ -45,6 +45,7 @@ in the command the variables are referring to
 							file.  
 	
 in this part, training xlsx file and test file should be in such a xlsx  
+  
 				cell pattern:  
 				id     plain_text   classifcation  
   
