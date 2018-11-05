@@ -20,7 +20,7 @@ Running with command line, there are three kinds of command pattern
 			 4. password-> password matching the username above;  
 			 5. dbname-> sub database storing the data to be predicted in the mongo;  
 			 6. collection-> table of storing the detailed data in the sub database;  
-			 7. txtid->key word in the table; item id of the data content, uniquely  
+			 7. txtid->key word in the table; item id of the data content, uniquely 
 			           indentifying each document;  
 			 8. txt->key word in the table;referring to the detailed data content.  
 			 9. limitation-> limited number of the collected data items from database  
@@ -43,9 +43,9 @@ in the command the variables are referring to
   
 	         1. trainFile->xlsx file name, store the training data;  
 	         2. testFile->xlsx file name, store the data to be classified;  
-			 3. dictionary->file holding the word embedding vectors, if set  
-							as -1, the project will training its own word  
-							vector dictionary with training file and testing  
+			 3. dictionary->file holding the word embedding vectors, if set 
+							as -1, the project will training its own word 
+							vector dictionary with training file and testing 
 							file.  
 	
 in this part, training xlsx file and test file should be in such a xlsx  
@@ -65,8 +65,16 @@ classification referes to the classification result of the data item
 -n means combine oldFile and newFile to a file named after oldFile  
 in the command the variables are referring to  
 						1. oldFile->xlsx file name, store the old training data  
-						2. newFile->xlsx file name, store the new data could be  
+						2. newFile->xlsx file name, store the new data could be 
 									used as training data  
+  			
+output file's name of different model:  
+  
+						A-> tt_result.xlsx(positive result)+nt_result(false positive result)  
+						B-> te_result.xlsx(positive result)+ne_result(false positive result)  
+						C-> t_result.xlsx(positive result)+n_result(false positive result)  
+  
+running c will also run A and B, which means result of A and B will alsp appear when running C  
   
 #############################DESCRIPTION##################################  
 during the classification process, there will be several middle files:  
