@@ -64,6 +64,7 @@ classification referes to the classification result of the data item
    
 -n means combine oldFile and newFile to a file named after oldFile  
 in the command the variables are referring to  
+  
 						1. oldFile->xlsx file name, store the old training data  
 						2. newFile->xlsx file name, store the new data could be 
 									used as training data  
@@ -111,7 +112,9 @@ which means combine the data in old.xlsx and new.xlsx and the result will store 
     
 be careful, when running in IDE, all the input file should be in the project root document  
 when running with jar file, command should start with java -jar   and all the file input  
-should be in the document where jar file is  
+should be in the document where jar file is ,like  
+  
+	java -jar -b train.xlsx test.xlsx sgns.weibo.word 
   
 ######################RESOURCE SUPPORT####################################  
 https://deeplearning4j.org/cn/archieved/zh-word2vec  
